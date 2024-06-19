@@ -1,5 +1,7 @@
 autoinstall:
   version: 1
+  interactive-sections:
+    - network
   identity:
     hostname: ladamczyk-desktop-ubuntu
     username: ladamczyk
@@ -7,16 +9,16 @@ autoinstall:
   storage:
     layout:
       name: lvm
-  early-commands:
-    - curtin in-target -- add-apt-repository ppa:danielrichter2007/grub-customizer
-    - curtin in-target -- apt update
-    - curtin in-target -- apt install apt-transport-https ca-certificates curl software-properties-common
-    - curtin in-target -- curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
-    - curtin in-target -- echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-    - curtin in-target -- apt update
-    - curtin in-target -- mkdir -p ~/.docker/cli-plugins/
-    - curtin in-target -- curl -SL https://github.com/docker/compose/releases/latest/download/docker-compose-linux-x86_64 -o ~/.docker/cli-plugins/docker-compose
-    - curtin in-target -- hmod +x ~/.docker/cli-plugins/docker-compose
+  # early-commands:
+  #   - curtin in-target -- add-apt-repository ppa:danielrichter2007/grub-customizer
+  #   - curtin in-target -- apt update
+  #   - curtin in-target -- apt install apt-transport-https ca-certificates curl software-properties-common
+  #   - curtin in-target -- curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+  #   - curtin in-target -- echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+  #   - curtin in-target -- apt update
+  #   - curtin in-target -- mkdir -p ~/.docker/cli-plugins/
+  #   - curtin in-target -- curl -SL https://github.com/docker/compose/releases/latest/download/docker-compose-linux-x86_64 -o ~/.docker/cli-plugins/docker-compose
+  #   - curtin in-target -- hmod +x ~/.docker/cli-plugins/docker-compose
   snaps:
     - name: code
       classic: true
