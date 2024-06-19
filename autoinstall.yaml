@@ -21,11 +21,8 @@ autoinstall:
   #   - curtin in-target -- hmod +x ~/.docker/cli-plugins/docker-compose
   snaps:
     - name: code
-      classic: true
     - name: slack
-      classic: false
     - name: spotify
-      classic: false
   packages:
     - vim
     - git
