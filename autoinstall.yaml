@@ -8,6 +8,9 @@ autoinstall:
     hostname: ladamczyk-desktop-ubuntu
     username: ladamczyk
     password: ''
+  storage:
+    layout:
+      name: direct
   early-commands:
     # - curtin in-target -- add-apt-repository ppa:danielrichter2007/grub-customizer
     - apt update
