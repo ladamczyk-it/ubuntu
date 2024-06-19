@@ -3,9 +3,9 @@ autoinstall:
   interactive-sections:
     - identity
     - storage
-  identity:
-    hostname: ladamczyk-desktop-ubuntu
-    username: ladamczyk
+  # identity:
+  #   hostname: ladamczyk-desktop-ubuntu
+  #   username: ladamczyk
     # password: "$y$j9T$wHxOMlOwVWr8VCwCvRk/X0$uM9EmOrnj1gHgw4k/eKSGgUe4IibwDbhIUzMU9gJFD2"
   # storage:
   #   layout:
