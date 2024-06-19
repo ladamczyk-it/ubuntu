@@ -1,7 +1,7 @@
 autoinstall:
   version: 1
-  interactive-sections:
-    - network
+  # interactive-sections:
+  #   - network
   identity:
     hostname: ladamczyk-desktop-ubuntu
     username: ladamczyk
