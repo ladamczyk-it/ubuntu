@@ -3,21 +3,18 @@ autoinstall:
   interactive-sections:
     - identity
     - storage
-  # identity:
-  #   hostname: ladamczyk-desktop-ubuntu
-  #   username: ladamczyk
-    # password: "$y$j9T$wHxOMlOwVWr8VCwCvRk/X0$uM9EmOrnj1gHgw4k/eKSGgUe4IibwDbhIUzMU9gJFD2"
-  # storage:
-  #   layout:
-  #     name: lvm
+  identity:
+    realname: 'Łukasz Adamczyk'
+    hostname: ladamczyk-desktop-ubuntu
+    username: ladamczyk
+    password: ''
   early-commands:
     # - curtin in-target -- add-apt-repository ppa:danielrichter2007/grub-customizer
     - apt update
-    - apt install apt-transport-https ca-certificates curl software-properties-common
+    - apt install -y apt-transport-https ca-certificates curl software-properties-common
     - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
     - echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-    - apt update
-    - apt install docker-ce 
+    # - apt update
     # - mkdir -p ~/.docker/cli-plugins/
     # - curl -SL https://github.com/docker/compose/releases/latest/download/docker-compose-linux-x86_64 -o ~/.docker/cli-plugins/docker-compose
     # - hmod +x ~/.docker/cli-plugins/docker-compose
@@ -32,6 +29,7 @@ autoinstall:
     # - grub-customizer
     # - docker-ce
   late-commands:
+    - curtin in-target -- apt update
     # - curtin in-target -- usermod -aG docker ladamczyk
     - curtin in-target -- wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
     - curtin in-target -- dpkg -i ./google-chrome-stable_current_amd64.deb
