@@ -8,32 +8,34 @@ autoinstall:
     hostname: ladamczyk-desktop-ubuntu
     username: ladamczyk
     password: ''
-  storage:
-    layout:
-      name: direct
-  early-commands:
+  # early-commands:
     # - curtin in-target -- add-apt-repository ppa:danielrichter2007/grub-customizer
-    - apt update
-    - apt install -y apt-transport-https ca-certificates curl software-properties-common
-    - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
-    - echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
     # - apt update
     # - mkdir -p ~/.docker/cli-plugins/
     # - curl -SL https://github.com/docker/compose/releases/latest/download/docker-compose-linux-x86_64 -o ~/.docker/cli-plugins/docker-compose
     # - hmod +x ~/.docker/cli-plugins/docker-compose
   snaps:
-    - name: code
     - name: slack
     - name: spotify
+    - name: code
+      classic: false
   packages:
+    - apt-transport-https 
+    - ca-certificates 
+    - curl
+    - software-properties-common
     - vim
     - git
     - htop
     # - grub-customizer
     # - docker-ce
   late-commands:
+    - curtin in-target -- curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+    - curtin in-target -- echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null
     - curtin in-target -- apt update
     # - curtin in-target -- usermod -aG docker ladamczyk
+    - curtin in-target -- snap remove --purge firefox
+    - curtin in-target -- apt autoremove -y
     - curtin in-target -- wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
     - curtin in-target -- dpkg -i ./google-chrome-stable_current_amd64.deb
     # - curtin in-target -- apt update
