@@ -10,15 +10,15 @@ autoinstall:
   #   layout:
   #     name: lvm
   early-commands:
-    - curtin in-target -- add-apt-repository ppa:danielrichter2007/grub-customizer
-    - curtin in-target -- apt update
-    - curtin in-target -- apt install apt-transport-https ca-certificates curl software-properties-common
-    - curtin in-target -- curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
-    - curtin in-target -- echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-    - curtin in-target -- apt update
-    - curtin in-target -- mkdir -p ~/.docker/cli-plugins/
-    - curtin in-target -- curl -SL https://github.com/docker/compose/releases/latest/download/docker-compose-linux-x86_64 -o ~/.docker/cli-plugins/docker-compose
-    - curtin in-target -- hmod +x ~/.docker/cli-plugins/docker-compose
+    # - curtin in-target -- add-apt-repository ppa:danielrichter2007/grub-customizer
+    - apt update
+    - apt install apt-transport-https ca-certificates curl software-properties-common
+    - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+    - echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+    - apt update
+    - mkdir -p ~/.docker/cli-plugins/
+    - curl -SL https://github.com/docker/compose/releases/latest/download/docker-compose-linux-x86_64 -o ~/.docker/cli-plugins/docker-compose
+    - hmod +x ~/.docker/cli-plugins/docker-compose
   snaps:
     - name: code
     - name: slack
@@ -27,7 +27,7 @@ autoinstall:
     - vim
     - git
     - htop
-    - grub-customizer
+    # - grub-customizer
     - docker-ce
   late-commands:
     - curtin in-target -- usermod -aG docker ladamczyk
